@@ -18,9 +18,11 @@ class TagController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'tags' => Tag::latest()->get()
-        ], 200);
+        $tags = Tag::latest()->get();
+        return TagResource::collection($tags);
+//        return response()->json([
+//            'tags' => Tag::latest()->get()
+//        ], 200);
         //return TagRe::collection(Tag::all());
     }
 

@@ -36,6 +36,9 @@ class PostController extends Controller
         return post::create([
             'name' => $request->name,
             'description' => $request->description,
+            'contact' => $request->contact,
+            'address' => $request->address,
+            'size' => $request->size,
             'slug' => str_slug($request->name),
         ]);
     }
