@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-
+use Image;
 class PostController extends Controller
 {
     public function index()
     {
         return response()->json([
-            'categories' => Post::latest()->get()
+            'posts' => Post::latest()->get()
         ], 200);
         //return TagRe::collection(Tag::all());
     }
@@ -33,6 +33,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+//        $image = $request->file('image');
+//        $imageName = time() .'_'.$image->getClientOriginalName();
+//        $directory = 'images/';
+//        $imageUrl = $directory . $imageName;
+//        Image::make($image)->resize(900, 632)->save($imageUrl);
+
+        //$aboutUs->image = $imageUrl;
         return post::create([
             'name' => $request->name,
             'description' => $request->description,
