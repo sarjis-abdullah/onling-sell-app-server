@@ -31,6 +31,11 @@ $factory->define(\App\Category::class, function (Faker $faker) {
         'slug' => str_slug( $faker->name),
         'description' => $faker->text,
     ];
+});$factory->define(\App\Tag::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'slug' => str_slug( $faker->name),
+    ];
 });
 
 $factory->define(\App\Post::class, function (Faker $faker) {
