@@ -7,6 +7,7 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
     Route::apiResource('tag', 'TagController');
 
 });
+Route::apiResource('category', 'CategoryController');
 Route::group([
 
     'prefix' => 'auth'

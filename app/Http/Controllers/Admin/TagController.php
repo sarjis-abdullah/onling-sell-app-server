@@ -19,7 +19,7 @@ class TagController extends Controller
     public function index()
     {
         return response()->json([
-            'tags' => Tag::all()
+            'tags' => Tag::latest()->get()
         ], 200);
         //return TagRe::collection(Tag::all());
     }
@@ -61,17 +61,6 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -80,7 +69,15 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $row = Tag::findOrFail($id);
+        if (!is_null($row)) {
+            $row->name = $request->name;
+            $row->slug = $request->slug;
+            $row->update();
+            return response()->json([
+                'tag' => $row
+            ], 200);
+        }
     }
 
     /**
