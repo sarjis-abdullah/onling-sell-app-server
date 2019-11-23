@@ -2,6 +2,11 @@
 
 
 Auth::routes();
+Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
+
+    Route::apiResource('tag', 'TagController');
+
+});
 Route::group([
 
     'prefix' => 'auth'
@@ -24,6 +29,8 @@ Route::group([
         Route::apiResource('brand', 'BrandController');
 
         Route::apiResource('user', 'UserController');
+
+
 
     });
 
