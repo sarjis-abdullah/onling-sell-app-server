@@ -26,5 +26,21 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => Hash::make('user@gmail.com'),
         ]);
+        DB::table('category_post')->insert([
+            'category_id' => 1,
+            'post_id' => 1,
+        ]);
+        DB::table('category_post')->insert([
+            'category_id' => 2,
+            'post_id' => 3,
+        ]);
+        DB::table('post_tag')->insert([
+            'tag_id' => 1,
+            'post_id' => 1,
+        ]);
+        DB::table('post_tag')->insert([
+            'tag_id' => 5,
+            'post_id' => 4,
+        ]);
     }
 }
