@@ -55,7 +55,7 @@ class CategoryController extends Controller
     {
         if (!is_null(Category::find($id))) {
             return response()->json([
-                'tags' => Category::find($id)
+                'post' => Category::find($id)
             ], 200);
         }
     }

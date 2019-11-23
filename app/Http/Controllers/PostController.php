@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return response()->json([
+            'categories' => Post::latest()->get()
+        ], 200);
+        //return TagRe::collection(Tag::all());
     }
 
     /**
@@ -30,56 +28,64 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        return post::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'slug' => str_slug($request->name),
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
+        if (!is_null(post::find($id))) {
+            return response()->json([
+                'post' => post::find($id)
+            ], 200);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $row = post::findOrFail($id);
+        if (!is_null($row)) {
+            $row->name = $request->name;
+            $row->description = $request->description;
+            $row->update();
+            return response()->json([
+                'post' => $row
+            ], 200);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $row = post::findOrFail($id);
+        if (!is_null($row)) {
+            post::destroy($id);
+        }
     }
 }

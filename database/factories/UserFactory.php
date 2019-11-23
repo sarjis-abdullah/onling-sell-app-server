@@ -43,9 +43,9 @@ $factory->define(\App\Post::class, function (Faker $faker) {
         'name' => $faker->name,
         'slug' => str_slug( $faker->name),
         'description' => $faker->text,
-        'contact' => $faker->text,
-        'address' => $faker->text,
-        'size' => $faker->text,
+        'contact' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'size' => $faker->randomDigitNotNull,
         'user_id' => 1,
     ];
 });

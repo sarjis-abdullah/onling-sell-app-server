@@ -8,6 +8,7 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
 
 });
 Route::apiResource('category', 'CategoryController');
+Route::apiResource('post', 'PostController');
 Route::group([
 
     'prefix' => 'auth'
