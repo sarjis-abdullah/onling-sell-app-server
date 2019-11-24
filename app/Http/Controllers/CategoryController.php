@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
         if (!is_null(Category::find($id))) {
             return response()->json([
-                'post' => Category::find($id)
+                'category' => Category::where('id',$id)->first()->posts
             ], 200);
         }
     }
