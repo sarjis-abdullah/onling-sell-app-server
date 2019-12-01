@@ -13,19 +13,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('users')->insert([
-//            'name' => 'Admin',
-//            'role_id' => 1,
-//            'email' => 'admin@gmail.com',
-//            'password' => Hash::make('admin@gmail.com'),
-//        ]);
-//
-//        DB::table('users')->insert([
-//            'name' => 'User',
-//            'role_id' => 2,
-//            'email' => 'user@gmail.com',
-//            'password' => Hash::make('user@gmail.com'),
-//        ]);
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'role_id' => 1,
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin@gmail.com'),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'User',
+            'role_id' => 2,
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('user@gmail.com'),
+        ]);
         DB::table('category_post')->insert([
             'category_id' => 1,
             'post_id' => 1,
