@@ -31,8 +31,44 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return Response
      */
+	 private function imageCustomization($request)
+    {
+        $url = '';
+		
+		$exploded = explode(',',$request);
+		$decoded = base64_decode($exploded[1]);
+		if(str_contains($exploded[0], 'png')){
+			$ext = 'png';
+		}else if(str_contains($exploded[0], 'jpeg')){
+			$ext = 'jpeg';
+		}else {
+			$ext = 'jpg';
+		}
+		$image_name = time() . '.' . $ext;
+		$upload_path = 'images/';
+		$url = $upload_path . $image_name;
+		file_put_contents($upload_path, $decoded);
+		return $url;
+        /* $semicolonPosition = strpos($request->imageUrl, ';');
+        $extracted_string_to_semicolon = substr($request->imageUrl, 0, $semicolonPosition);
+        $slesh_separated_string = explode('/', $extracted_string_to_semicolon)[1];
+        $image_extension = strtolower($slesh_separated_string);
+		return $image_extension;
+        if ($image_extension != 'jpg' || $image_extension != 'jpeg' || $image_extension != 'gif') {
+            $image_name = time() . '.' . $image_extension;
+            $upload_path = 'images/';
+            $url = $upload_path . $image_name;
+            //Image::make($request->post_image)->resize(200, 200)->save($url);
+            Image::make($request->imageUrl)->save($url);
+        }
+        return $url; */
+        //return $image_extension;
+    }
     public function store(Request $request)
     {
+	//$this->validation($request);
+        $url = $this->imageCustomization($request);
+		return $url;
 //        $image = $request->file('image');
 //        $imageName = time() .'_'.$image->getClientOriginalName();
 //        $directory = 'images/';
@@ -40,14 +76,14 @@ class PostController extends Controller
 //        Image::make($image)->resize(900, 632)->save($imageUrl);
 
         //$aboutUs->image = $imageUrl;
-        return post::create([
+        /* return post::create([
             'name' => $request->name,
             'description' => $request->description,
             'contact' => $request->contact,
             'address' => $request->address,
             'size' => $request->size,
             'slug' => str_slug($request->name),
-        ]);
+        ]); */
     }
 
     /**
