@@ -46,6 +46,7 @@ $factory->define(\App\Post::class, function (Faker $faker) {
         'contact' => $faker->phoneNumber,
         'address' => $faker->address,
         'size' => $faker->randomDigitNotNull,
+        'price' =>  rand(100,200),
         'user_id' => rand(1,2),
     ];
 });

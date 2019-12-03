@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->integer('numberOfBed')->default(0);
             $table->integer('numberOfBath')->default(0);
             $table->string('size');
+            $table->float('price');
             $table->string('image')->default('default.png');
             $table->string('slug');
             $table->unsignedBigInteger('user_id');

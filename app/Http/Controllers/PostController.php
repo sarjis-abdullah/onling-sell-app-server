@@ -7,6 +7,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Image;
+
 class PostController extends Controller
 {
     public function index()
@@ -31,24 +32,25 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return Response
      */
-	 private function imageCustomization($request)
+    private function imageCustomization($request)
     {
         $url = '';
-		
-		$exploded = explode(',',$request);
-		$decoded = base64_decode($exploded[1]);
-		if(str_contains($exploded[0], 'png')){
-			$ext = 'png';
-		}else if(str_contains($exploded[0], 'jpeg')){
-			$ext = 'jpeg';
-		}else {
-			$ext = 'jpg';
-		}
-		$image_name = time() . '.' . $ext;
-		$upload_path = 'images/';
-		$url = $upload_path . $image_name;
-		file_put_contents($upload_path, $decoded);
-		return $url;
+
+        $exploded = explode(',', $request);
+        $decoded = base64_decode($exploded[1]);
+        if (str_contains($exploded[0], 'png')) {
+            $ext = 'png';
+        } else if (str_contains($exploded[0], 'jpeg')) {
+            $ext = 'jpeg';
+        } else {
+            $ext = 'jpg';
+        }
+        $image_name = time() . '.' . $ext;
+
+        $upload_path = public_path().'/images/';
+        $url = $upload_path . $image_name;
+        return $url;
+
         /* $semicolonPosition = strpos($request->imageUrl, ';');
         $extracted_string_to_semicolon = substr($request->imageUrl, 0, $semicolonPosition);
         $slesh_separated_string = explode('/', $extracted_string_to_semicolon)[1];
@@ -64,11 +66,12 @@ class PostController extends Controller
         return $url; */
         //return $image_extension;
     }
+
     public function store(Request $request)
     {
-	//$this->validation($request);
+        //$this->validation($request);
         $url = $this->imageCustomization($request);
-		return $url;
+        return $url;
 //        $image = $request->file('image');
 //        $imageName = time() .'_'.$image->getClientOriginalName();
 //        $directory = 'images/';
