@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
             $table->string('size');
             $table->float('price');
             $table->string('image')->default('default.png');
-            $table->string('slug');
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')->on('users')

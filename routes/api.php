@@ -9,6 +9,7 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
 });
 Route::apiResource('category', 'CategoryController');
 Route::apiResource('post', 'PostController');
+Route::post('post-search', 'PostController@search');
 Route::group([
 
     'prefix' => 'auth'

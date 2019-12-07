@@ -15,6 +15,13 @@ class PostController extends Controller
         $Posts = Post::latest()->get();
         return PostResource::collection($Posts);
     }
+    public function search(Request $request)
+    {
+
+        return $request;
+        $Posts = Post::latest()->get();
+        return PostResource::collection($Posts);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,8 +36,8 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return Response
+     * @param \Illuminate\Http\Request $request
+     * @return string
      */
     private function imageCustomization($request)
     {
@@ -42,57 +49,34 @@ class PostController extends Controller
             $ext = 'png';
         } else if (str_contains($exploded[0], 'jpeg')) {
             $ext = 'jpeg';
+        }else if (str_contains($exploded[0], 'jpg')) {
+            $ext = 'jpg';
         } else {
             $ext = 'jpg';
         }
         $image_name = time() . '.' . $ext;
 
-        $upload_path = public_path().'/images/';
+        $upload_path = public_path() . '/images/';
         $url = $upload_path . $image_name;
-        return $url;
 
-        /* $semicolonPosition = strpos($request->imageUrl, ';');
-        $extracted_string_to_semicolon = substr($request->imageUrl, 0, $semicolonPosition);
-        $slesh_separated_string = explode('/', $extracted_string_to_semicolon)[1];
-        $image_extension = strtolower($slesh_separated_string);
-		return $image_extension;
-        if ($image_extension != 'jpg' || $image_extension != 'jpeg' || $image_extension != 'gif') {
-            $image_name = time() . '.' . $image_extension;
-            $upload_path = 'images/';
-            $url = $upload_path . $image_name;
-            //Image::make($request->post_image)->resize(200, 200)->save($url);
-            Image::make($request->imageUrl)->save($url);
-        }
-        return $url; */
-        //return $image_extension;
+        Image::make($request)->resize(200, 200)->save($url);
+        Image::make($request)->save($url);
+        return $url;
     }
 
     public function store(Request $request)
     {
         //$this->validation($request);
-        $url = $this->imageCustomization($request);
-        return $url;
-//        $image = $request->file('image');
-//        $imageName = time() .'_'.$image->getClientOriginalName();
-//        $directory = 'images/';
-//        $imageUrl = $directory . $imageName;
-//        Image::make($image)->resize(900, 632)->save($imageUrl);
-
-        //$aboutUs->image = $imageUrl;
-        /* return post::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'contact' => $request->contact,
-            'address' => $request->address,
-            'size' => $request->size,
-            'slug' => str_slug($request->name),
-        ]); */
+        $url = $this->imageCustomization($request->image);
+        return Post::create($request->except('image') + [
+                'image' => $url
+            ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -107,8 +91,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -127,7 +111,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)
