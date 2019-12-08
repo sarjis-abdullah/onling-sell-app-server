@@ -6,6 +6,7 @@ use App\Http\Resources\PostResource;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Image;
 
 class PostController extends Controller
@@ -15,11 +16,11 @@ class PostController extends Controller
         $Posts = Post::latest()->get();
         return PostResource::collection($Posts);
     }
+
     public function search(Request $request)
     {
+        $Posts = Post::where('category_id', $request->categoryId)->get();
 
-        return $request;
-        $Posts = Post::latest()->get();
         return PostResource::collection($Posts);
     }
 
@@ -49,7 +50,7 @@ class PostController extends Controller
             $ext = 'png';
         } else if (str_contains($exploded[0], 'jpeg')) {
             $ext = 'jpeg';
-        }else if (str_contains($exploded[0], 'jpg')) {
+        } else if (str_contains($exploded[0], 'jpg')) {
             $ext = 'jpg';
         } else {
             $ext = 'jpg';

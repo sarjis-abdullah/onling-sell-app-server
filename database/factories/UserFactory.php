@@ -28,25 +28,19 @@ use Faker\Generator as Faker;
 $factory->define(\App\Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'slug' => str_slug( $faker->name),
         'description' => $faker->text,
-    ];
-});$factory->define(\App\Tag::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'slug' => str_slug( $faker->name),
     ];
 });
 
 $factory->define(\App\Post::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'slug' => str_slug( $faker->name),
         'description' => $faker->text,
         'contact' => $faker->phoneNumber,
         'address' => $faker->address,
         'size' => $faker->randomDigitNotNull,
-        'price' =>  rand(100,200),
+        'price' =>  rand(155,200),
         'user_id' => rand(1,2),
+        'category_id' => rand(1,10),
     ];
 });

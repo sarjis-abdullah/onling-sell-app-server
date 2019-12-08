@@ -34,14 +34,8 @@ class UsersTableSeeder extends Seeder
             'category_id' => 2,
             'post_id' => 3,
         ]);
-        DB::table('post_tag')->insert([
-            'tag_id' => 1,
-            'post_id' => 1,
-        ]);
-        DB::table('post_tag')->insert([
-            'tag_id' => 5,
-            'post_id' => 4,
-        ]);DB::table('category_post')->insert([
+
+        DB::table('category_post')->insert([
             'category_id' => 1,
             'post_id' => 1,
         ]);
@@ -49,28 +43,13 @@ class UsersTableSeeder extends Seeder
             'category_id' => 2,
             'post_id' => 3,
         ]);
-        DB::table('post_tag')->insert([
-            'tag_id' => 1,
-            'post_id' => 1,
-        ]);
-        DB::table('post_tag')->insert([
-            'tag_id' => 5,
-            'post_id' => 4,
-        ]);DB::table('category_post')->insert([
+       DB::table('category_post')->insert([
             'category_id' => 1,
             'post_id' => 1,
         ]);
         DB::table('category_post')->insert([
             'category_id' => 2,
             'post_id' => 3,
-        ]);
-        DB::table('post_tag')->insert([
-            'tag_id' => 1,
-            'post_id' => 1,
-        ]);
-        DB::table('post_tag')->insert([
-            'tag_id' => 5,
-            'post_id' => 4,
         ]);
     }
 }
