@@ -19,9 +19,34 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        $Posts = Post::where('category_id', $request->categoryId)->get();
+        //if ($request->address == "")
+//        if ($request->address == ""){
+//            $Posts = Post::whereBetween('price', [$request->minPrice, $request->maxPrice])
+//                ->where('category_id', $request->categoryId)
+//                ->get();
+//        }
 
-        return PostResource::collection($Posts);
+        // flat range
+
+//        if ($request->flatRange[0] >0  && $request->flatRange[1] > $request->flatRange[0] ){
+//            $Posts = Post::whereBetween('flatRange', [$request->flatRange[0], $request->flatRange[1]])->get();
+//            return PostResource::collection($Posts);
+//        }else{
+//            return 'hello';
+//        }
+
+
+        // land range
+        if ($request->landRange[0] >0  && $request->landRange[1] > $request->landRange[0] ){
+            $Posts = Post::whereBetween('landRange', [$request->landRange[0], $request->landRange[1]])
+                ->where('category_id', $request->categoryId)
+                ->get();
+            return PostResource::collection($Posts);
+        }
+
+
+
+
     }
 
     /**

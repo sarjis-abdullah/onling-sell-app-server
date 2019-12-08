@@ -21,7 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('address');
             $table->integer('numberOfBed')->default(0);
             $table->integer('numberOfBath')->default(0);
-            $table->string('size');
+            $table->float('flatRange');
+            $table->float('landRange');
             $table->float('price');
             $table->string('image')->default('default.png');
             $table->unsignedBigInteger('category_id');

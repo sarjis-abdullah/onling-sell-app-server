@@ -34,11 +34,12 @@ $factory->define(\App\Category::class, function (Faker $faker) {
 
 $factory->define(\App\Post::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->title,
         'description' => $faker->text,
         'contact' => $faker->phoneNumber,
         'address' => $faker->address,
-        'size' => $faker->randomDigitNotNull,
+        'flatRange' => rand(1,20),
+        'landRange' => rand(3,15),
         'price' =>  rand(155,200),
         'user_id' => rand(1,2),
         'category_id' => rand(1,10),
