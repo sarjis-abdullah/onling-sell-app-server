@@ -13,7 +13,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $Posts = Post::latest()->get();
+        $Posts = Post::orderBy('created_at', 'DESC')
+                                    ->paginate(6);;
         return PostResource::collection($Posts);
     }
 
@@ -147,11 +148,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        if (!is_null(post::find($id))) {
-            return response()->json([
-                'post' => post::find($id)
-            ], 200);
-        }
+		$posts = Post::where('id',$id)->first();
+		return $posts;
     }
 
     /**
