@@ -19,34 +19,42 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        //if ($request->address == "")
-//        if ($request->address == ""){
-//            $Posts = Post::whereBetween('price', [$request->minPrice, $request->maxPrice])
-//                ->where('category_id', $request->categoryId)
-//                ->get();
-//        }
-
-        // flat range
-
-//        if ($request->flatRange[0] >0  && $request->flatRange[1] > $request->flatRange[0] ){
-//            $Posts = Post::whereBetween('flatRange', [$request->flatRange[0], $request->flatRange[1]])->get();
-//            return PostResource::collection($Posts);
-//        }else{
-//            return 'hello';
-//        }
-
-
-        // land range
-        if ($request->landRange[0] >0  && $request->landRange[1] > $request->landRange[0] ){
-            $Posts = Post::whereBetween('landRange', [$request->landRange[0], $request->landRange[1]])
-                ->where('category_id', $request->categoryId)
-                ->get();
+        if ($request->categoryId !== null) {
+            if ($request->landRange[0] > 0 && $request->landRange[1] > $request->landRange[0]) {
+                if ($request->flatRange[0] > 0 && $request->flatRange[1] > $request->flatRange[0]) {
+                    if ($request->minPrice < $request->maxPrice) {
+                        $Posts = Post::whereBetween('landRange', [$request->landRange[0], $request->landRange[1]])
+                            ->whereBetween('flatRange', [$request->flatRange[0], $request->flatRange[1]])
+                            ->whereBetween('price', [$request->minPrice, $request->maxPrice])
+                            ->where('category_id', $request->categoryId)
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(10);
+                        return PostResource::collection($Posts);
+                    } else {
+                        $Posts = Post::whereBetween('landRange', [$request->landRange[0], $request->landRange[1]])
+                            ->whereBetween('flatRange', [$request->flatRange[0], $request->flatRange[1]])
+                            ->where('category_id', $request->categoryId)
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(5);
+                        return PostResource::collection($Posts);
+                    }
+                } else {
+                    $Posts = Post::whereBetween('landRange', [$request->landRange[0], $request->landRange[1]])
+                        ->where('category_id', $request->categoryId)
+                        ->orderBy('created_at', 'DESC')
+                        ->paginate(5);
+                    return PostResource::collection($Posts);
+                }
+            } else {
+                $Posts = Post::where('category_id', $request->categoryId)
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(5);
+                return PostResource::collection($Posts);
+            }
+        } else {
+            $Posts = Post::orderBy('created_at', 'DESC')->paginate(5);
             return PostResource::collection($Posts);
         }
-
-
-
-
     }
 
     /**
