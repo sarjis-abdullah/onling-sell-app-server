@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\Category;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
@@ -52,11 +53,14 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        if (!is_null(Category::find($id))) {
+		$Posts = Post::where('category_id','=',$id)->get();
+		return $Posts;
+        //return PostResource::collection($Posts);
+        /* if (!is_null(Category::find($id))) {
             return response()->json([
                 'category' => Category::where('id',$id)->first()->posts
             ], 200);
-        }
+        } */
     }
 
     /**

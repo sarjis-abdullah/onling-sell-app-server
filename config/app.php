@@ -176,7 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 		Barryvdh\Cors\ServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+		Barryvdh\Cors\ServiceProvider::class,
 
     ],
 

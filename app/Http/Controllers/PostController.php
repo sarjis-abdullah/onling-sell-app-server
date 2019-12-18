@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Image;
+//use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -148,6 +150,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
+		//return DB::table('category_post')->where('post_id','=',$id)->get();
         $Posts = Post::where('id','=',$id)->get();
         return PostResource::collection($Posts);
     }

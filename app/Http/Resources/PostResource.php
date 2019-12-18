@@ -26,6 +26,7 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'price' => $this->price,
             'id' => $this->id,
+            'category_id' => $this->category_id,
         ];
     }
 }
