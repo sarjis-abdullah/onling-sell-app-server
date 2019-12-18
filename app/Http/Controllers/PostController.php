@@ -148,8 +148,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-		$posts = Post::where('id',$id)->first();
-		return $posts;
+        $Posts = Post::where('id','=',$id)->get();
+        return PostResource::collection($Posts);
     }
 
     /**
