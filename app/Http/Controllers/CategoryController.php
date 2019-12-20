@@ -41,7 +41,6 @@ class CategoryController extends Controller
         return Category::create([
             'name' => $request->name,
             'description' => $request->description,
-            'slug' => str_slug($request->name),
         ]);
     }
 
