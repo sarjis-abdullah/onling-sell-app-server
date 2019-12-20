@@ -185,6 +185,9 @@ class PostController extends Controller
     {
         $row = post::findOrFail($id);
         if (!is_null($row)) {
+			if($row->image && $row->image != 'default.png'){
+			unlink($row->image);	
+			}
             post::destroy($id);
         }
     }
