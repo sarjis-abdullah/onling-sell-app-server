@@ -15,6 +15,7 @@ class PostController extends Controller
 {
     public function index()
     {
+//        return \response()->download(public_path('images/1.jpeg'));
         $Posts = Post::orderBy('created_at', 'DESC')
                                     ->paginate(6);;
         return PostResource::collection($Posts);
@@ -128,7 +129,7 @@ class PostController extends Controller
         $upload_path = public_path() . '/images/';
         $url = $upload_path . $image_name;
 
-        Image::make($request)->resize(200, 200)->save($url);
+        Image::make($request)->resize(100, 100)->save($url);
         Image::make($request)->save($url);
         return $url;
     }

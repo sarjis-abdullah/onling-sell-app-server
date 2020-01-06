@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class PostResource extends JsonResource
 {
@@ -29,6 +30,7 @@ class PostResource extends JsonResource
             'price' => $this->price,
             'id' => $this->id,
             'category_id' => $this->category_id,
+
         ];
     }
 }
