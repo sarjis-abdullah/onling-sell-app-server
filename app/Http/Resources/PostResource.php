@@ -30,7 +30,7 @@ class PostResource extends JsonResource
             'price' => $this->price,
             'id' => $this->id,
             'category_id' => $this->category_id,
-
+            'image' => asset($this->image),
         ];
     }
 }
