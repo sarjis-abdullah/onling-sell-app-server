@@ -71,7 +71,7 @@ class PostController extends Controller
         }
         $image_name = time() . '.' . $ext;
 
-        $upload_path = public_path() . '/images/';
+        $upload_path = 'images/';
         $url = $upload_path . $image_name;
 
         Image::make($request)->resize(100, 100)->save($url);
