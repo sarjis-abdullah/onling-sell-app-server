@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->float('flatRange');
             $table->float('landRange');
             $table->float('price');
+            $table->string('type');
             $table->string('image')->default('default.png');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');

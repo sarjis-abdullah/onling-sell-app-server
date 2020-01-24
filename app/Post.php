@@ -9,7 +9,7 @@ class Post extends Model
     protected $fillable = [
         'name', 'description', 'price',
         'flatRange','address','contact','numberOfBed','numberOfBath',
-        'category_id','user_id', 'image', 'landRange'
+        'category_id','user_id', 'image', 'landRange','type'
     ];
     public function categories()
     {

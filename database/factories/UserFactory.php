@@ -38,6 +38,7 @@ $factory->define(\App\Post::class, function (Faker $faker) {
         'description' => $faker->text,
         'contact' => $faker->phoneNumber,
         'address' => $faker->address,
+        'type' => $faker->country,
         'flatRange' =>  rand(1,4),
         'landRange' =>  rand(1,4),
         'numberOfBed' => rand(1,4),
