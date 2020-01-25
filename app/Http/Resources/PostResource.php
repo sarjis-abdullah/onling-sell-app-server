@@ -31,6 +31,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'category_id' => $this->category_id,
             'image' => asset($this->image),
+            'type' => $this->type,
         ];
     }
 }
