@@ -4,7 +4,6 @@ Route::apiResource('post', 'PostController');
 Route::post('post-search', 'PostController@search');
 Route::apiResource('registration', 'RegistrationController');
 
-Route:get('get-my-post', 'YourController@getPost');
 Route::group([
 
     'prefix' => 'auth'
