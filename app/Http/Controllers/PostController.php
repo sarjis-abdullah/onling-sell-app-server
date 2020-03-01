@@ -111,9 +111,59 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $row = post::findOrFail($id);
+        if (strpos($request->image, 'http://') !== false) {
+            $row->name = $request->name;
+            $row->description = $request->description;
+            $row->contact = $request->contact;
+            $row->address = $request->address;
+            $row->numberOfBed = $request->numberOfBed;
+            $row->numberOfBath = $request->numberOfBath;
+            $row->landRange = $request->landRange;
+            $row->price = $request->price;
+            $row->type = $request->type;
+            $row->category_id = $request->category_id;
+            $row->update();
+            return response()->json([
+                'post' => $row
+            ], 200);
+        }else{
+//            if($row->image && $row->image != 'default.png'){
+//                unlink($row->image);
+//            }
+           // post::destroy($id);
+            $url = $this->imageCustomization($request->image);
+            $row->name = $request->name;
+            $row->description = $request->description;
+            $row->contact = $request->contact;
+            $row->address = $request->address;
+            $row->numberOfBed = $request->numberOfBed;
+            $row->numberOfBath = $request->numberOfBath;
+            $row->landRange = $request->landRange;
+            $row->price = $request->price;
+            $row->type = $request->type;
+            $row->image = $url;
+            $row->category_id = $request->category_id;
+            $row->update();
+            return response()->json([
+                'post' => $row
+            ], 200);
+        }
+        $row = post::findOrFail($id);
+        return Post::create($request->except('image') + [
+                'image' => $request->image
+            ]);
         if (!is_null($row)) {
             $row->name = $request->name;
             $row->description = $request->description;
+            $row->contact = $request->contact;
+            $row->address = $request->address;
+            $row->numberOfBed = $request->numberOfBed;
+            $row->numberOfBath = $request->numberOfBath;
+            $row->landRange = $request->landRange;
+            $row->price = $request->price;
+            $row->image = $request->image;
+            $row->type = $request->type;
+            $row->category_id = $request->category_id;
             $row->update();
             return response()->json([
                 'post' => $row
@@ -132,7 +182,7 @@ class PostController extends Controller
         $row = post::findOrFail($id);
         if (!is_null($row)) {
 			if($row->image && $row->image != 'default.png'){
-			unlink($row->image);	
+			unlink($row->image);
 			}
             post::destroy($id);
         }
