@@ -187,4 +187,22 @@ class PostController extends Controller
             post::destroy($id);
         }
     }
+    function searchByLocation()
+        {
+            $searchItem = \Request::get('s');
+            return response()->json([
+                            'post' => $searchItem
+                        ], 200);
+//return $searchItem;
+            if ($searchItem!=NULL){
+                $Posts = Post::where('address', 'LIKE', "%$searchItem%")
+                    ->get();
+
+                return PostResource::collection($Posts);
+            }else{
+                //return $this->getBlogPosts();
+            }
+
+
+        }
 }
