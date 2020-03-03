@@ -187,20 +187,17 @@ class PostController extends Controller
             post::destroy($id);
         }
     }
-    function searchByLocation()
+    function searchByLocation(Request $request)
         {
-            $searchItem = \Request::get('s');
-            return response()->json([
-                            'post' => $searchItem
-                        ], 200);
-//return $searchItem;
+            $searchItem = $request->search;
             if ($searchItem!=NULL){
                 $Posts = Post::where('address', 'LIKE', "%$searchItem%")
                     ->get();
 
                 return PostResource::collection($Posts);
-            }else{
-                //return $this->getBlogPosts();
+            }else if($searchItem==''){
+                $posts = $this->postRepository->search($request);
+                        return PostResource::collection($posts);
             }
 
 

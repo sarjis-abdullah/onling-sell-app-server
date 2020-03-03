@@ -3,7 +3,7 @@ Route::apiResource('category', 'CategoryController');
 Route::apiResource('post', 'PostController');
 Route::post('post-search', 'PostController@search');
 Route::apiResource('registration', 'RegistrationController');
-Route::get('searchByLocation', 'PostController@searchByLocation');
+Route::post('searchByLocation', 'PostController@searchByLocation');
 Route::group([
 
     'prefix' => 'auth'
